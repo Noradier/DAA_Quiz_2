@@ -33,12 +33,14 @@ public class Game implements Runnable {
 		State.setState(gameState);
 	}
 	
+	// Nama lainnya update tiap frame
 	private void tick() {
 		
 		if(State.getState() != null)
 			State.getState().tick();
 	}
 	
+	// Menggambar frame untuk ditampilkan pada layar
 	private void render() {
 		bs = display.getCanvas().getBufferStrategy();
 		if(bs == null) {
