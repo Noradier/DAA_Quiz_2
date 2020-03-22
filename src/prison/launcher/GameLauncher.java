@@ -1,6 +1,6 @@
-package pacman.launcher;
+package prison.launcher;
 
-import pacman.main.Game;
+import prison.main.Game;
 
 public class GameLauncher {
 	

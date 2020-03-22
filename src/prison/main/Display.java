@@ -1,4 +1,4 @@
-package pacman.main;
+package prison.main;
 
 import java.awt.Canvas;
 import java.awt.Dimension;

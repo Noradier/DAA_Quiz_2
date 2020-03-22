@@ -1,8 +1,10 @@
-package pacman.main;
+package prison.main;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import pacman.main.Display;
+import prison.main.Display;
+import prison.state.GameState;
+import prison.state.State;
 
 public class Game implements Runnable {
 	private Display display;
@@ -15,6 +17,8 @@ public class Game implements Runnable {
 	private BufferStrategy bs;
 	private Graphics g;
 	
+	private State gameState;
+	
 	public Game(String title, int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -23,10 +27,15 @@ public class Game implements Runnable {
 	
 	private void init() {
 		display = new Display(title, width, height);
+		
+		gameState = new GameState(this);
+		State.setState(gameState);
 	}
 	
 	private void tick() {
 		
+		if(State.getState() != null)
+			State.getState().tick();
 	}
 	
 	private void render() {
@@ -37,6 +46,9 @@ public class Game implements Runnable {
 		}
 		g = bs.getDrawGraphics();
 		g.clearRect(0, 0, width, height);
+		
+		if(State.getState() != null)
+			State.getState().render(g);
 		
 		bs.show();
 		g.dispose();
@@ -106,6 +118,5 @@ public class Game implements Runnable {
 		}
 		if(running)
 			return;
-	}
-	
+	}	
 }
