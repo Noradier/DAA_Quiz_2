@@ -5,10 +5,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
-public class EntityPlayer extends Entity implements KeyListener{
+public class Player extends GameObject implements KeyListener{
 	private boolean[] keys; // Mungkin dibuat class baru
 	
-	public EntityPlayer(int posX, int posY, BufferedImage avatar) {
+	public Player(int posX, int posY, BufferedImage avatar) {
 		super(posX, posY, avatar);
 		keys = new boolean[256];
 	}

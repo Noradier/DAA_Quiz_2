@@ -3,7 +3,7 @@ package prison.entity;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public abstract class Entity {
+public abstract class GameObject {
 	protected int posX, posY;
 	protected BufferedImage avatar;
 	
@@ -23,7 +23,7 @@ public abstract class Entity {
 		this.posY = posY;
 	}
 	
-	public Entity(int posX, int posY, BufferedImage avatar) {
+	public GameObject(int posX, int posY, BufferedImage avatar) {
 		this.posX = posX;
 		this.posY = posY;
 		this.avatar = avatar;

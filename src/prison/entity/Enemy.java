@@ -3,9 +3,9 @@ package prison.entity;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class EntityEnemy extends Entity {
+public class Enemy extends GameObject {
 
-	public EntityEnemy(int posX, int posY, BufferedImage avatar) {
+	public Enemy(int posX, int posY, BufferedImage avatar) {
 		super(posX, posY, avatar);
 	}
 
