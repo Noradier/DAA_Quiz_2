@@ -1,11 +1,12 @@
 package prison.entity;
 
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 public class EntityPlayer extends Entity implements KeyListener{
-	private boolean[] keys;
+	private boolean[] keys; // Mungkin dibuat class baru
 	
 	public EntityPlayer(int posX, int posY, BufferedImage avatar) {
 		super(posX, posY, avatar);
@@ -25,6 +26,12 @@ public class EntityPlayer extends Entity implements KeyListener{
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void tick() {
 		// TODO Auto-generated method stub
 		
 	}

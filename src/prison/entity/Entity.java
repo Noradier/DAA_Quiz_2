@@ -1,5 +1,6 @@
 package prison.entity;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public abstract class Entity {
@@ -26,5 +27,11 @@ public abstract class Entity {
 		this.posX = posX;
 		this.posY = posY;
 		this.avatar = avatar;
+	}
+	
+	public abstract void tick();
+	
+	public void render(Graphics g) {
+		g.drawImage(avatar, posX, posY, null);
 	}
 }
