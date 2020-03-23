@@ -1,5 +1,5 @@
 package prison.entity;
 
-public class EntityEnemy {
+public class EntityEnemy extends Entity {
 
 }
