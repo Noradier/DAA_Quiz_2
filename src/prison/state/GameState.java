@@ -1,6 +1,5 @@
 package prison.state;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import prison.main.Asset;
@@ -17,7 +16,7 @@ public class GameState extends State {
 
 	@Override
 	public void tick() {
-		//Insert stage.render(), player.render(), dan enemy.render() 
+		//Insert stage.tick(), player.tick(), dan enemy.tick() 
 	}
 
 	@Override
