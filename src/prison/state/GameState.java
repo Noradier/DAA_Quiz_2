@@ -26,13 +26,16 @@ public class GameState extends State {
 	public GameState(Game game) {
 		super(game);
 		buttonDown = new ButtonDown(400, 400, ImageLoader.loadImage("/ButtonTest.png"), 160, 160);
-		buttonLeft = new ButtonLeft(400-160, 400, ImageLoader.loadImage("/ButtonTest.png"), 160, 160);
-		buttonUp = new ButtonUp(400, 400-160, ImageLoader.loadImage("/ButtonTest.png"), 160, 160);
-		buttonRight = new ButtonRight(400+160, 400, ImageLoader.loadImage("/ButtonTest.png"), 160, 160);
+		buttonLeft = new ButtonLeft(400-200, 400, ImageLoader.loadImage("/ButtonTest.png"), 160, 160);
+		buttonUp = new ButtonUp(400, 400-200, ImageLoader.loadImage("/ButtonTest.png"), 160, 160);
+		buttonRight = new ButtonRight(400+200, 400, ImageLoader.loadImage("/ButtonTest.png"), 160, 160);
 		level = new Level1();
 //		player = new Player(0, 0, Asset.player);
 //		player.setV(level.getV());
 		buttonDown.setPlayer((Player)player);
+		buttonLeft.setPlayer((Player)player);
+		buttonUp.setPlayer((Player)player);
+		buttonRight.setPlayer((Player)player);
 	}
 	
 	@Override
@@ -48,7 +51,6 @@ public class GameState extends State {
 		buttonLeft.render(g);
 		buttonUp.render(g);
 		buttonRight.render(g);
-		
 		// Insert player.render() dan enemy.render()
 	}
 

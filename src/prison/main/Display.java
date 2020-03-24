@@ -75,6 +75,13 @@ public class Display{
 		
 		if(GameState.buttonDown.isInside(x, y))
 			GameState.buttonDown.onClick(x, y);
+		if(GameState.buttonLeft.isInside(x, y))
+			GameState.buttonLeft.onClick(x, y);
+		if(GameState.buttonUp.isInside(x, y))
+			GameState.buttonUp.onClick(x, y);
+		if(GameState.buttonRight.isInside(x, y))
+			GameState.buttonRight.onClick(x, y);
+		
 		
 		System.out.println("TESST");
 	}
