@@ -10,6 +10,11 @@ public class Map {
 		init();
 	}
 	
+	public static void main(String[] args) {
+		Map map = new Map(4);
+		map.printGraph();
+	}
+	
 	public int[][] getGraph() {
 		return graph;
 	}
