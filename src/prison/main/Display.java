@@ -10,7 +10,7 @@ import prison.utils.Clickable;
 import prison.utils.MouseHandler;
 
 @SuppressWarnings("serial")
-public class Display extends JPanel{
+public class Display{
 	private JFrame frame;
 	private Canvas canvas;
 	
@@ -26,11 +26,6 @@ public class Display extends JPanel{
 	}
 	
 	private void createDisplay() {
-		MouseHandler handler = new MouseHandler(this);
-		addMouseListener(handler);
-		addMouseMotionListener(handler);
-		addMouseWheelListener(handler);
-		
 		frame = new JFrame(title);
 		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,6 +41,11 @@ public class Display extends JPanel{
 
 		frame.add(canvas);
 		frame.pack();
+		
+		MouseHandler handler = new MouseHandler(this);
+		canvas.addMouseListener(handler);
+		canvas.addMouseMotionListener(handler);
+		canvas.addMouseWheelListener(handler);
 	}
 	
 	public Canvas getCanvas() {
@@ -71,5 +71,6 @@ public class Display extends JPanel{
 //			}
 //		}
 //		repaint();
+		System.out.println("TESST");
 	}
 }
