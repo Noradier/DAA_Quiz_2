@@ -6,19 +6,16 @@ import prison.utils.ImageLoader;
 import prison.utils.Map;
 
 public class Level3 extends Level{
-
-	private Map map;
-	public static BufferedImage bg;
 	public Level3() {
-		super(4);
+		super(4, "/Level3.png");
 		makeLevel(map);
-		bg = ImageLoader.loadImage("/Level3.png");
 	}
 //	public static void main(String[] args) {
 //		Map mapa = new Map(4);
 //		makeLevel(mapa);
 //		mapa.printGraph();
 //	}
+	@Override
 	public void makeLevel(Map map1)
 	{
 		map1.deleteEdge(4, 5);
@@ -27,13 +24,5 @@ public class Level3 extends Level{
 		map1.deleteEdge(9, 10);
 		map1.deleteEdge(10, 11);
 		map1.deleteEdge(7, 11);
-	}
-	public int[][] getLevel()
-	{
-		return map.getGraph();
-	}
-	public BufferedImage getBackground()
-	{
-		return bg;
 	}
 }
