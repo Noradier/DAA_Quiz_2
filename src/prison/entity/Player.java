@@ -1,18 +1,17 @@
 package prison.entity;
 
-import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 public class Player extends GameObject implements KeyListener{
-	private boolean[] keys; // Mungkin dibuat class baru
+	private boolean[] keys;
 	
 	public Player(int posX, int posY, BufferedImage avatar) {
 		super(posX, posY, avatar);
 		keys = new boolean[256];
 	}
-
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		keys[e.getKeyCode()] = true;

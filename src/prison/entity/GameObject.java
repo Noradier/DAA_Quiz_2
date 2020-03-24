@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 public abstract class GameObject {
 	protected int posX, posY;
 	protected BufferedImage avatar;
+	protected int V;
 	
 	public int getPosX() {
 		return posX;
@@ -23,6 +24,14 @@ public abstract class GameObject {
 		this.posY = posY;
 	}
 	
+	public int getV() {
+		return V;
+	}
+	
+	public void setV(int V) {
+		this.V = V;
+	}
+	
 	public GameObject(int posX, int posY, BufferedImage avatar) {
 		this.posX = posX;
 		this.posY = posY;
@@ -32,6 +41,6 @@ public abstract class GameObject {
 	public abstract void tick();
 	
 	public void render(Graphics g) {
-		g.drawImage(avatar, posX, posY, null);
+		g.drawImage(avatar, posX, posY, 800/V, 800/V, null);
 	}
 }

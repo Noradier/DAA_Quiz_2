@@ -19,6 +19,10 @@ public class Map {
 		return graph;
 	}
 	
+	public int getV() {
+		return V;
+	}
+	
 	private void init() {
 		size = V*V;
 		graph = new int[size][size];

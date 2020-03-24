@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import prison.state.GameState;
 import prison.utils.Clickable;
 import prison.utils.MouseHandler;
 
@@ -71,6 +72,10 @@ public class Display{
 //			}
 //		}
 //		repaint();
+		
+		if(GameState.buttonDown.isInside(x, y))
+			GameState.buttonDown.onClick(x, y);
+		
 		System.out.println("TESST");
 	}
 }
