@@ -1,10 +1,11 @@
 package prison.entity;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import prison.utils.Clickable;
 
-public abstract class Button extends GameObject implements Clickable {
+public class Button extends GameObject implements Clickable {
 	private int width;
 	private int height;
 	
@@ -19,7 +20,21 @@ public abstract class Button extends GameObject implements Clickable {
 		if (x >= posX && x <= posX+width && y >= posY && y <= posY+height) return true;
 		return false;
 	}
+
+	@Override
+	public void onClick(int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void tick() {
+		
+	}
 	
 	@Override
-	public abstract void onClick(int x, int y);
+	public final void render(Graphics g) {
+		g.drawImage(avatar, posX, posY, width, height, null);
+	}
+
 }

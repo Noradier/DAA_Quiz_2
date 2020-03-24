@@ -2,9 +2,15 @@ package prison.main;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
-import javax.swing.JFrame;
 
-public class Display {
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import prison.utils.Clickable;
+import prison.utils.MouseHandler;
+
+@SuppressWarnings("serial")
+public class Display extends JPanel{
 	private JFrame frame;
 	private Canvas canvas;
 	
@@ -20,6 +26,11 @@ public class Display {
 	}
 	
 	private void createDisplay() {
+		MouseHandler handler = new MouseHandler(this);
+		addMouseListener(handler);
+		addMouseMotionListener(handler);
+		addMouseWheelListener(handler);
+		
 		frame = new JFrame(title);
 		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,5 +59,17 @@ public class Display {
 	public void closeFrame() {
 		frame.setVisible(false);
 		frame.dispose();
+	}
+	
+	public void mousePressed(int x, int y) {
+//		for (Renderable renderObject : scenes.get(currentScene).getSceneObjects()) {
+//			if (renderObject instanceof Clickable) {
+//				Clickable inputObject = (Clickable)renderObject;
+//				if (inputObject.isInside(x, y)) {
+//					inputObject.onClick(x, y);
+//				}
+//			}
+//		}
+//		repaint();
 	}
 }
