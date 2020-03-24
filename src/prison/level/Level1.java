@@ -5,12 +5,12 @@ import java.awt.image.BufferedImage;
 import prison.utils.ImageLoader;
 import prison.utils.Map;
 
-public class Level1 {
-	private Map map;
+public class Level1 extends Level {
+	
 	public static BufferedImage bg;
 	public Level1()
 	{
-		map = new Map(5);
+		super(5);
 		makeLevel(map);
 		bg = ImageLoader.loadImage("/Level1.png");
 	}
@@ -19,7 +19,7 @@ public class Level1 {
 //		makeLevel(mapa);
 //		mapa.printGraph();
 //	}
-	private static void makeLevel(Map map1)
+	public void makeLevel(Map map1)
 	{
 		map1.deleteEdge(5, 6);
 		map1.deleteEdge(1, 6);
