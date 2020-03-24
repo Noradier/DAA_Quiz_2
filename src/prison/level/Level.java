@@ -24,4 +24,8 @@ public abstract class Level {
 	{
 		return bg;
 	}
+	public Map getMap()
+	{
+		return map;
+	}
 }
