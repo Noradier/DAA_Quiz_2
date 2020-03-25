@@ -74,7 +74,5 @@ public class Display{
 			GameState.buttonUp.onClick(x, y);
 		if(GameState.buttonRight.isInside(x, y))
 			GameState.buttonRight.onClick(x, y);
-		
-		System.out.println("TESST");
 	}
 }

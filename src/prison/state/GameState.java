@@ -37,10 +37,10 @@ public class GameState extends State {
 	}
 	
 	private void initButton() {
-		buttonDown = new ButtonDown(400, 400, ImageLoader.loadImage("/ButtonTest.png"), 160, 160);
-		buttonLeft = new ButtonLeft(400-200, 400, ImageLoader.loadImage("/ButtonTest.png"), 160, 160);
-		buttonUp = new ButtonUp(400, 400-200, ImageLoader.loadImage("/ButtonTest.png"), 160, 160);
-		buttonRight = new ButtonRight(400+200, 400, ImageLoader.loadImage("/ButtonTest.png"), 160, 160);
+		buttonDown = new ButtonDown(900, 350, Asset.buttonDown, 100, 100);
+		buttonLeft = new ButtonLeft(900-100, 350, Asset.buttonLeft, 100, 100);
+		buttonUp = new ButtonUp(900, 350-100, Asset.buttonUp, 100, 100);
+		buttonRight = new ButtonRight(900+100, 350, Asset.buttonRight, 100, 100);
 		buttonDown.setPlayer((Player)player);
 		buttonLeft.setPlayer((Player)player);
 		buttonUp.setPlayer((Player)player);

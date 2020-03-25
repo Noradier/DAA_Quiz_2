@@ -11,9 +11,9 @@ public class Asset {
 		player = ImageLoader.loadImage("/penjahat_1.png");
 		enemy = ImageLoader.loadImage("/polisi_1.png");
 		background = ImageLoader.loadImage("/tiles.png");
-//		buttonLeft = ImageLoader.loadImage(path);
-//		buttonUp = ImageLoader.loadImage(path);
-//		buttonRight = ImageLoader.loadImage(path);
-//		buttonDown = ImageLoader.loadImage(path);
+		buttonLeft = ImageLoader.loadImage("/ButtonLeft.png");
+		buttonUp = ImageLoader.loadImage("/ButtonUp.png");
+		buttonRight = ImageLoader.loadImage("/ButtonRight.png");
+		buttonDown = ImageLoader.loadImage("/ButtonDown.png");
 	}
 }
