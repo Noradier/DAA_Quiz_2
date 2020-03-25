@@ -15,10 +15,10 @@ public class Level2 extends Level{
 	@Override
 	public void makeLevel(Map map1)
 	{
-		map1.deleteEdge(1, 2);
+		map1.deleteEdge(0, 1);
+		map1.deleteEdge(4, 5);
+		map1.deleteEdge(5, 9);
 		map1.deleteEdge(5, 6);
 		map1.deleteEdge(6, 10);
-		map1.deleteEdge(6, 7);
-		// map1.deleteEdge(7, 11);
 	}
 }

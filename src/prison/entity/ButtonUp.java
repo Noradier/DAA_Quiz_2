@@ -15,6 +15,11 @@ public class ButtonUp extends Button{
 		if(player == null)
 			return;
 		
+		if(GameState.finish1)
+			GameState.level2 = true;
+		if(GameState.finish2)
+			GameState.level3 = true;
+		
 		int sizeConst, oldX, oldY, newX, newY;
 		sizeConst = 800 / player.getV();
 		oldX = player.getPosX() / sizeConst;

@@ -63,16 +63,27 @@ public class Display{
 	}
 	
 	public void mousePressed(int x, int y) {
-		if(GameState.enemyTurn)
+		if(GameState.enemyTurn || GameState.win)
 			return;
 		
-		if(GameState.buttonDown.isInside(x, y))
-			GameState.buttonDown.onClick(x, y);
-		if(GameState.buttonLeft.isInside(x, y))
-			GameState.buttonLeft.onClick(x, y);
-		if(GameState.buttonUp.isInside(x, y))
-			GameState.buttonUp.onClick(x, y);
-		if(GameState.buttonRight.isInside(x, y))
-			GameState.buttonRight.onClick(x, y);
+		if(GameState.mainMenu) {
+			if(GameState.startPlay.isInside(x, y))
+				GameState.startPlay.onClick(x, y);
+		} else if(GameState.gameOver) {
+			if(GameState.retry.isInside(x, y))
+				GameState.retry.onClick(x, y);
+			if(GameState.toMainMenu.isInside(x, y))
+				GameState.toMainMenu.onClick(x, y);
+		} else {
+			if(GameState.buttonDown.isInside(x, y))
+				GameState.buttonDown.onClick(x, y);
+			if(GameState.buttonLeft.isInside(x, y))
+				GameState.buttonLeft.onClick(x, y);
+			if(GameState.buttonUp.isInside(x, y))
+				GameState.buttonUp.onClick(x, y);
+			if(GameState.buttonRight.isInside(x, y))
+				GameState.buttonRight.onClick(x, y);
+		}
+		
 	}
 }

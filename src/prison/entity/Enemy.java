@@ -8,12 +8,10 @@ import prison.utils.Map;
 public class Enemy extends GameObject {
 	private Player player;
 	private Map map, dfsMap;
-	private int path[];
-	private boolean finishedSearch, chaseRight, chaseDown;
+	private Path path;
 	
 	public Enemy(int posX, int posY, BufferedImage avatar) {
 		super(posX, posY, avatar);
-		path = new int[2];
 	}
 	
 	public void setPlayer(Player player) {
@@ -27,80 +25,106 @@ public class Enemy extends GameObject {
 	@Override
 	public void setV(int V) {
 		super.setV(V);
+		path = new Path(V);
 		dfsMap = new Map(V);
 	}
 	
-	private void chasePlayer(int vertex, int i, boolean chaseRight, boolean chaseDown) {
-		System.out.println("chasePlayer(" + vertex + ", "+ i + ")");
-		setEnemyPosition();
-		if(i == 2)
-			finishedSearch = true;
-		
-		if(finishedSearch)
-			return;
-		
-		int oldVertexX, oldVertexY, newVertexX, newVertexY;
-		oldVertexX = vertex % V;
-		oldVertexY = vertex / V;
-		
-		if(chaseRight) {
-			for(int p = oldVertexX + oldVertexY * V; p < (V-1) + oldVertexY * V ; p++) {
-				if(dfsMap.getGraph()[vertex][p] == 1) {
-					path[i] = p;
-					chasePlayer(p, i+1, chaseRight, chaseDown);
-				}
-			}
+	private void chasePlayer(int vertex, int dest) {
+		if(posX < player.getPosX()) {
+			if(vertex + 1 < V*V)
+				if(map.getGraph()[vertex][vertex + 1] == 1)
+					path.firstPath = vertex + 1;
+		} else if(posX > player.getPosX()) {
+			if(vertex - 1 > -1)
+				if(map.getGraph()[vertex][vertex - 1] == 1)
+					path.firstPath = vertex - 1;
 		} else {
-			for(int p = oldVertexX + oldVertexY * V; p > oldVertexY * V - 1 ; p--) {
-				if(dfsMap.getGraph()[vertex][p] == 1) {
-					path[i] = p;
-					chasePlayer(p, i+1, chaseRight, chaseDown);
-				}
-			}
+			System.out.println("EQUAL");
+			if(path.firstPath == -1)
+				if(vertex - 1 > -1)
+					if(map.getGraph()[vertex][vertex - 1] == 1)
+						path.firstPath = vertex - 1;
+			if(path.firstPath == -1)
+				if(vertex + 1 < V*V)
+					if(map.getGraph()[vertex][vertex + 1] == 1)
+						path.firstPath = vertex + 1;
 		}
 		
-		if(finishedSearch)
-			return;
-		
-		if(chaseDown) {
-			for(int p = oldVertexX + oldVertexY * V; p < V*V ; p+=V) {
-				if(dfsMap.getGraph()[vertex][p] == 1) {
-					path[i] = p;
-					chasePlayer(p, i+1, chaseRight, chaseDown);
+		if(path.firstPath == -1)
+			dfs(-1, -1, 0, vertex, dest);
+		else
+			dfs(-1, 1, path.firstPath, dest);
+	}
+	
+	private void dfs(int secondPath, int distance, int vertex, int dest) {
+		for(int i=0; i<V*V; i++) {
+			if(dfsMap.getGraph()[vertex][i] == 0)
+				continue;
+			
+			if(dfsMap.getGraph()[vertex][dest] == 1) {
+				if(distance < path.visited[dest] || path.visited[dest] == -1) {
+					if(secondPath == -1) {
+						path.secondPath = dest;
+						path.visited[i] = distance;
+						return;
+					}
+					path.secondPath = secondPath;
+					path.visited[dest] = distance;
+					return;
 				}
 			}
-		} else {
-			for(int p = oldVertexX + oldVertexY * V; p > -1 ; p-=V) {
-				if(dfsMap.getGraph()[vertex][p] == 1) {
-					path[i] = p;
-					chasePlayer(p, i+1, chaseRight, chaseDown);
-				}
+			
+			if(dfsMap.getGraph()[vertex][i] == 1 && (distance < path.visited[i] || path.visited[i] == -1)) {
+				path.visited[i] = distance;
+				if(secondPath == -1)
+					dfs(i, distance+1, i, dest);
+				else
+					dfs(secondPath, distance+1, i, dest);
 			}
 		}
 	}
 	
-	private void setEnemyPosition() {
-		int sizeConst, playerX, playerY, enemyX, enemyY;
-		sizeConst = 800 / V;
-		playerX = player.getPosX() / sizeConst;
-		playerY = player.getPosY() / sizeConst;
-		enemyX = posX / sizeConst;
-		enemyY = posY / sizeConst;
-		
-		if(playerX > enemyX)
-			chaseRight = true;
-		else
-			chaseRight = false;
-		
-		if(playerY > enemyY)
-			chaseDown = true;
-		else
-			chaseDown = false;
+	private void dfs(int firstPath, int secondPath, int distance, int vertex, int dest) {
+		for(int i=0; i< V*V; i++) {
+			if(dfsMap.getGraph()[vertex][i] == 0)
+				continue;
+			
+			if(dfsMap.getGraph()[vertex][dest] == 1) {
+				if(distance < path.visited[dest] || path.visited[dest] == -1) {
+					if(firstPath == -1) {
+						path.firstPath = dest;
+						path.visited[i] = distance;
+						return;
+					}
+					if(secondPath == -1) {
+						path.secondPath = dest;
+						path.visited[i] = distance;
+						return;
+					}
+					path.firstPath = firstPath;
+					path.secondPath = secondPath;
+					path.visited[i] = distance;
+					return;
+				}
+			}
+			
+			if(dfsMap.getGraph()[vertex][i] == 1 && (distance < path.visited[i] || path.visited[i] == -1)) {
+				path.visited[i] = distance;
+				if(firstPath == -1)
+					dfs(i, -1, distance+1, i, dest);
+				else if(secondPath == -1)
+					dfs(firstPath, i, distance+1, i, dest);
+				else
+					dfs(firstPath, secondPath, distance+1, i, dest);
+			}
+		}
 	}
 	
 	private void chasePlayer() {
-		int initialVertex = posX * V / 800 + posY * V * V / 800;
-		chasePlayer(initialVertex, 0, chaseRight, chaseDown);
+		int initVertex = posX * V / 800 + posY * V * V / 800;
+		int destVertex = player.getPosX() * V / 800 + player.getPosY() * V * V / 800;
+		path.resetPath();
+		chasePlayer(initVertex, destVertex);
 	}
 	
 	@Override
@@ -110,25 +134,49 @@ public class Enemy extends GameObject {
 		
 		int sizeConst, enemyX, enemyY;
 		sizeConst = 800 / V;
-		enemyX = posX / sizeConst;
-		enemyY = posY / sizeConst;
 		
-		if(map.getGraph()[enemyX + enemyY * V][path[0]] == 1 && walking) {
-			posX = path[0] % V * sizeConst;
-			posY = path[0] / V * sizeConst;
-		} else
-			walking = false;
-		
-		enemyX = posX / sizeConst;
-		enemyY = posY / sizeConst;
-		
-		if(map.getGraph()[enemyX + enemyY * V][path[1]] == 1 && walking) {
-			for(int i=0; i< 18; i++) ;
-			posX = path[1] % V * sizeConst;
-			posY = path[1] / V * sizeConst;
+		if(path.firstPath != -1) {
+			enemyX = posX / sizeConst;
+			enemyY = posY / sizeConst;
+			if(map.getGraph()[enemyX + enemyY * V][path.firstPath] == 1 && walking) {
+				posX = path.firstPath % V * sizeConst;
+				posY = path.firstPath / V * sizeConst;
+			} else
+				walking = false;
 		}
 		
-		finishedSearch = false;
+		if(posX == player.getPosX() && posY == player.getPosY()) {
+			GameState.enemyTurn = false;
+			return;
+		}
+		
+		if(path.secondPath != -1) {
+			enemyX = posX / sizeConst;
+			enemyY = posY / sizeConst;
+			if(map.getGraph()[enemyX + enemyY * V][path.secondPath] == 1 && walking) {
+				posX = path.secondPath % V * sizeConst;
+				posY = path.secondPath / V * sizeConst;
+			}
+		}
+		
 		GameState.enemyTurn = false;
+	}
+	
+	class Path{
+		public int firstPath;
+		public int secondPath;
+		public int visited[];
+		
+		public Path(int V) {
+			visited = new int[V*V];
+			resetPath();
+		}
+		
+		public void resetPath() {
+			firstPath = -1;
+			secondPath = -1;
+			for(int i=0; i<visited.length; i++)
+				visited[i] = -1;
+		}
 	}
 }

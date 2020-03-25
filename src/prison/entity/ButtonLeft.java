@@ -15,6 +15,9 @@ public class ButtonLeft extends Button{
 		if(player == null)
 			return;
 		
+		if(GameState.finish3)
+			GameState.level4 = true;
+		
 		int sizeConst, oldX, oldY, newX, newY;
 		sizeConst = 800 / player.getV();
 		oldX = player.getPosX() / sizeConst;

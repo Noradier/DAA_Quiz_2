@@ -5,7 +5,7 @@ import prison.utils.ImageLoader;
 
 public class Asset {
 	public static BufferedImage
-		player, enemy, background, buttonLeft, buttonUp, buttonRight, buttonDown;
+		player, enemy, background, buttonLeft, buttonUp, buttonRight, buttonDown, gameOver, winScreen;
 	
 	public static void init() {
 		player = ImageLoader.loadImage("/penjahat_1.png");
@@ -15,5 +15,7 @@ public class Asset {
 		buttonUp = ImageLoader.loadImage("/ButtonUp.png");
 		buttonRight = ImageLoader.loadImage("/ButtonRight.png");
 		buttonDown = ImageLoader.loadImage("/ButtonDown.png");
+		gameOver = ImageLoader.loadImage("/gameOver.png");
+		winScreen = ImageLoader.loadImage("/win.png");
 	}
 }

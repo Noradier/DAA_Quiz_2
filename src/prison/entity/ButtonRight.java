@@ -15,6 +15,11 @@ public class ButtonRight extends Button{
 		if(player == null)
 			return;
 		
+		if(GameState.finish4)
+			GameState.level5 = true;
+		if(GameState.finish5)
+			GameState.win = true;
+		
 		int sizeConst, oldX, oldY, newX, newY;
 		sizeConst = 800 / player.getV();
 		oldX = player.getPosX() / sizeConst;
