@@ -63,15 +63,8 @@ public class Display{
 	}
 	
 	public void mousePressed(int x, int y) {
-//		for (Renderable renderObject : scenes.get(currentScene).getSceneObjects()) {
-//			if (renderObject instanceof Clickable) {
-//				Clickable inputObject = (Clickable)renderObject;
-//				if (inputObject.isInside(x, y)) {
-//					inputObject.onClick(x, y);
-//				}
-//			}
-//		}
-//		repaint();
+		if(GameState.enemyTurn)
+			return;
 		
 		if(GameState.buttonDown.isInside(x, y))
 			GameState.buttonDown.onClick(x, y);
@@ -81,7 +74,6 @@ public class Display{
 			GameState.buttonUp.onClick(x, y);
 		if(GameState.buttonRight.isInside(x, y))
 			GameState.buttonRight.onClick(x, y);
-		
 		
 		System.out.println("TESST");
 	}

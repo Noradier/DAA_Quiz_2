@@ -1,8 +1,5 @@
 package prison.level;
 
-import java.awt.image.BufferedImage;
-
-import prison.utils.ImageLoader;
 import prison.utils.Map;
 
 public class Level3 extends Level{

@@ -3,11 +3,13 @@ package prison.entity;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import prison.utils.Clickable;
+import prison.utils.Map;
 
 public abstract class Button extends GameObject implements Clickable {
 	protected int width;
 	protected int height;
 	protected Player player;
+	protected Map map;
 	
 	public Button(int posX, int posY, BufferedImage texture, int width, int height) {
 		super(posX, posY, texture);
@@ -17,6 +19,10 @@ public abstract class Button extends GameObject implements Clickable {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+	
+	public void setMap(Map map) {
+		this.map = map;
 	}
 	
 	@Override

@@ -1,8 +1,5 @@
 package prison.level;
 
-import java.awt.image.BufferedImage;
-
-import prison.utils.ImageLoader;
 import prison.utils.Map;
 
 public class Level2 extends Level{
@@ -22,6 +19,6 @@ public class Level2 extends Level{
 		map1.deleteEdge(5, 6);
 		map1.deleteEdge(6, 10);
 		map1.deleteEdge(6, 7);
-		map1.deleteEdge(7, 11);
+		// map1.deleteEdge(7, 11);
 	}
 }
