@@ -34,12 +34,19 @@ public class Enemy extends GameObject {
 			if(vertex + 1 < V*V)
 				if(map.getGraph()[vertex][vertex + 1] == 1)
 					path.firstPath = vertex + 1;
+			if(path.firstPath == -1)
+				if(vertex - 1 > -1)
+					if(map.getGraph()[vertex][vertex - 1] == 1)
+						path.firstPath = vertex - 1;
 		} else if(posX > player.getPosX()) {
 			if(vertex - 1 > -1)
 				if(map.getGraph()[vertex][vertex - 1] == 1)
 					path.firstPath = vertex - 1;
+			if(path.firstPath == -1)
+				if(vertex + 1 < V*V)
+					if(map.getGraph()[vertex][vertex + 1] == 1)
+						path.firstPath = vertex + 1;
 		} else {
-			System.out.println("EQUAL");
 			if(path.firstPath == -1)
 				if(vertex - 1 > -1)
 					if(map.getGraph()[vertex][vertex - 1] == 1)
@@ -50,18 +57,23 @@ public class Enemy extends GameObject {
 						path.firstPath = vertex + 1;
 		}
 		
-		if(path.firstPath == -1)
+		if(path.firstPath == -1) {
+			path.visited[vertex] = 0;
 			dfs(-1, -1, 0, vertex, dest);
-		else
-			dfs(-1, 1, path.firstPath, dest);
+		}
+		else {
+			path.visited[vertex] = 0;
+			dfs(-1, 0, path.firstPath, dest);
+		}
+			
 	}
 	
 	private void dfs(int secondPath, int distance, int vertex, int dest) {
 		for(int i=0; i<V*V; i++) {
-			if(dfsMap.getGraph()[vertex][i] == 0)
+			if(map.getGraph()[vertex][i] == 0)
 				continue;
 			
-			if(dfsMap.getGraph()[vertex][dest] == 1) {
+			if(map.getGraph()[vertex][dest] == 1) {
 				if(distance < path.visited[dest] || path.visited[dest] == -1) {
 					if(secondPath == -1) {
 						path.secondPath = dest;
@@ -74,7 +86,8 @@ public class Enemy extends GameObject {
 				}
 			}
 			
-			if(dfsMap.getGraph()[vertex][i] == 1 && (distance < path.visited[i] || path.visited[i] == -1)) {
+			if(map.getGraph()[vertex][i] == 1
+					&& (distance < path.visited[i] || path.visited[i] == -1)) {
 				path.visited[i] = distance;
 				if(secondPath == -1)
 					dfs(i, distance+1, i, dest);
@@ -86,29 +99,30 @@ public class Enemy extends GameObject {
 	
 	private void dfs(int firstPath, int secondPath, int distance, int vertex, int dest) {
 		for(int i=0; i< V*V; i++) {
-			if(dfsMap.getGraph()[vertex][i] == 0)
+			if(map.getGraph()[vertex][i] == 0)
 				continue;
 			
-			if(dfsMap.getGraph()[vertex][dest] == 1) {
+			if(map.getGraph()[vertex][dest] == 1) {
 				if(distance < path.visited[dest] || path.visited[dest] == -1) {
 					if(firstPath == -1) {
 						path.firstPath = dest;
-						path.visited[i] = distance;
+						path.visited[dest] = distance;
 						return;
 					}
 					if(secondPath == -1) {
 						path.secondPath = dest;
-						path.visited[i] = distance;
+						path.visited[dest] = distance;
 						return;
 					}
 					path.firstPath = firstPath;
 					path.secondPath = secondPath;
-					path.visited[i] = distance;
+					path.visited[dest] = distance;
 					return;
 				}
 			}
 			
-			if(dfsMap.getGraph()[vertex][i] == 1 && (distance < path.visited[i] || path.visited[i] == -1)) {
+			if(map.getGraph()[vertex][i] == 1 
+					&& (distance < path.visited[i] || path.visited[i] == -1)) {
 				path.visited[i] = distance;
 				if(firstPath == -1)
 					dfs(i, -1, distance+1, i, dest);
@@ -133,7 +147,10 @@ public class Enemy extends GameObject {
 		boolean walking = true;
 		
 		int sizeConst, enemyX, enemyY;
-		sizeConst = 800 / V;
+		if(V == 6)
+			sizeConst = 133;
+		else
+			sizeConst = 800 / V;
 		
 		if(path.firstPath != -1) {
 			enemyX = posX / sizeConst;

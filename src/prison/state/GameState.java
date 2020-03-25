@@ -97,7 +97,7 @@ public class GameState extends State {
 		level = new Level2();
 		player.setPosX(600); player.setPosY(600);
 		player.setV(level.getMap().getV());
-		enemy.setPosX(600); enemy.setPosY(200);
+		enemy.setPosX(200); enemy.setPosY(200);
 		((Enemy)enemy).setPlayer((Player)player);
 		((Enemy)enemy).setMap(level.getMap());
 		enemy.setV(level.getMap().getV());
@@ -194,11 +194,12 @@ public class GameState extends State {
 		}
 		
 		if(level5) {
-			if(player.getPosX() == (5 * 800 / 6) && player.getPosY() == 0)
+			if(player.getPosX() >= 666 && player.getPosY() == 0)
 				finish5 = true;
 			else
 				finish5 = false;
 			if(win) {
+				level5 = false;
 				return;
 			}
 		}
